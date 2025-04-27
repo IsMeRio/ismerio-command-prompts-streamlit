@@ -7,3 +7,5 @@ and run rec.py at computer that you want to connect
 
 then run streamlit as server then copy ip of ngrok and put at ip fill box
 then connect and enjoy
+
+please use at own risk
