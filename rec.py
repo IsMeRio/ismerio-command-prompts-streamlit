@@ -49,6 +49,14 @@ async def execute_command(request: Request):
                 return {"output": f"Changed directory to {current_directory}", "current_directory": current_directory}
             else:
                 return {"output": f"Directory does not exist: {path}", "current_directory": current_directory}
+        
+        elif cmd.lower() == "goback":
+            parent_directory = os.path.dirname(current_directory)
+            if os.path.exists(parent_directory):
+                current_directory = parent_directory
+                return {"output": f"Moved back to {current_directory}", "current_directory": current_directory}
+            else:
+                return {"output": "Cannot move back from root directory.", "current_directory": current_directory}
 
         elif cmd.lower().startswith("make folder "):
             folder_name = cmd[12:].strip()
@@ -107,6 +115,7 @@ async def execute_command(request: Request):
                 "Available Commands:\n"
                 "-------------------------\n"
                 "go <path>            - Change directory to specified path\n"
+                "goback               - Move one level up from the current directory\n"
                 "make folder <name>   - Create a new folder in current directory\n"
                 "make file <name>     - Create a new empty file in current directory\n"
                 "remove folder <name> - Delete a folder in current directory\n"
